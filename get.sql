@@ -14,7 +14,7 @@ order by booked_space.reserved_begin;
 select resturant_table.table_identifier,
        resturant_table.number_of_seats,
        bs.pris as book_price,
-       DATE(bs.reserved_begin) as reservation_date,
+       (bs.reserved_begin) as reservation_date,
        c.username as customer_name
 from resturant_table
 left join booked_space bs on resturant_table.identity = bs.resturant_table_id
