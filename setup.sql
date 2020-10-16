@@ -290,14 +290,9 @@ values (2, 3, 2);
 
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------------
 create view overview_of_tables as
-select available_space.identity,
-       rt.table_identifier,
-       rt.number_of_seats,
-       available_space.pris,
-       available_space.reserved_begin,
-       available_space.reserved_end
-from available_space
-left join resturant_table rt on available_space.resturant_table_id = rt.identity;
+select *
+from resturant_table
+order by table_identifier;
 
 create view person_name_view as
 select Customer_name.identity, pfn.content as firstname, pmn.content as middlename, pln.content as lastname
@@ -305,3 +300,14 @@ from customer_name
 left join person_first_name pfn on Customer_name.customer_first_name_id = pfn.identity
 left join person_last_name pln on Customer_name.customer_last_name_id = pln.identity
 left join person_middle_name pmn on Customer_name.customer_middle_name_id = pmn.identity;
+
+create view customer_address_view  as
+select customer_address.identity,
+       address_road_name.content as road_name,
+       customer_address.house_number,
+       address_city.content as city,
+       address_post_number.content as post_number
+from customer_address
+left join address_road_name on customer_address.road_name_id = address_road_name.identity
+left join address_city on customer_address.city_id = address_city.identity
+left join address_post_number on customer_address.post_number_id = address_post_number.identity;
